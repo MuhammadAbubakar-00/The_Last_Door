@@ -16,6 +16,6 @@ public class WireNode : MonoBehaviour
     public void OnTapped()
     {
         if (isConnected) return;
-        manager.NodeSelected(this);
+        //manager.NodeSelected(this);
     }
 }

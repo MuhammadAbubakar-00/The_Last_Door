@@ -70,13 +70,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            if (spawnedObject != null)
-                return;
+            // if (spawnedObject != null)
+            //     return;
 
             UpdatePlacementIndicator();
 
-            if (!placementPoseValid)
-                return;
+            // if (!placementPoseValid)
+            //     return;
 
             if (TryGetTouch(out _))
             {
@@ -151,8 +151,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         private void PlaceObject()
 {
-    if (!planeDetected || !placementPoseValid)
-        return;
+    // if (!planeDetected || !placementPoseValid)
+    //     return;
 
     spawnedObject = Instantiate(
         m_PlacedPrefab,

@@ -5,6 +5,15 @@ public class TimerManager : MonoBehaviour
 {
     public float timeRemaining = 600f;
     public TextMeshProUGUI timerText;
+    public static TimerManager instance;
+    private float timeElapsed;
+private float penaltyTime;
+
+    void Awake()
+    {
+        instance = this;
+
+    }
 
     void Update()
     {
@@ -32,4 +41,13 @@ public class TimerManager : MonoBehaviour
     {
         Debug.Log("Time Up!");
     }
+    public float GetTimeElapsed()
+{
+    return timeElapsed;
+}
+
+public float GetPenalty()
+{
+    return penaltyTime;
+}
 }

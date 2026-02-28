@@ -20,6 +20,23 @@ public class Level1Manager : MonoBehaviour
         if (puzzlesCompleted >= 3)
         {
             finalConsole.SetActive(true);
+            FinalScreenManager.Instance.ShowFinalScreen
+            (
+                true,
+                TimerManager.instance.GetTimeElapsed(),
+                TimerManager.instance.GetPenalty(),
+                CalculateScore()
+            );
         }
+    }
+    private int CalculateScore()
+    {
+        float time = TimerManager.instance.GetTimeElapsed();
+        float penalty = TimerManager.instance.GetPenalty();
+
+        int baseScore = 1000;
+        int finalScore = baseScore - Mathf.RoundToInt(time * 5f) - Mathf.RoundToInt(penalty * 2f);
+
+        return Mathf.Max(finalScore, 0);
     }
 }

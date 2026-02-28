@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7959144776855737966}
   - component: {fileID: 8051075687109650385}
-  - component: {fileID: 291056194012803876}
   m_Layer: 0
   m_Name: Wire
   m_TagString: Untagged
@@ -54,7 +53,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5021a979da7e87418b6118e9b78fed9, type: 2}
+  - {fileID: 2100000, guid: b521ce64aca5f9345b866d73586b0ce9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,15 +136,3 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &291056194012803876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3646598752855178083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d69355b73fcacb46b67f66ab37bdff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

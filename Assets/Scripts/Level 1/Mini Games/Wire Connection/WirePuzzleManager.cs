@@ -1,130 +1,228 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class WirePuzzleManager : MonoBehaviour
 {
-    [Header("Setup")]
-    public Camera arCamera;
-    public LayerMask nodeLayer;
-    public LineRenderer wirePrefab;
-    public Transform wireParent;
+    [Header("References")]
+    [SerializeField] private List<WireNodeUI> leftNodes;
+    [SerializeField] private List<WireNodeUI> rightNodes;
+    [SerializeField] private LineRenderer wirePrefab;
+    [SerializeField] private Transform wireParent;
+    [SerializeField] private GameObject puzzlePanel;
 
-    public List<WireNode> leftNodes;
-    public List<WireNode> rightNodes;
+    [Header("Wire Colors")]
+    [SerializeField] private List<Color> wireColors;
+    [SerializeField] private ParticleSystem sparkPrefab;
+
+    [Header("Gameplay")]
+    [SerializeField] private float wrongPenalty = 20f;
 
     private Dictionary<int, int> correctPairs = new Dictionary<int, int>();
-
-    private WireNode selectedLeftNode;
+    private WireNodeUI selectedLeftNode;
     private int connectedCount = 0;
 
-    void Start()
+    private void Start()
+    {
+        InitializeNodes();
+        AssignColors();
+        GenerateRandomConnections();
+    }
+
+    private void InitializeNodes()
     {
         foreach (var node in leftNodes)
             node.Initialize(this);
 
         foreach (var node in rightNodes)
             node.Initialize(this);
-
-        GenerateConnections();
     }
 
-    void Update()
+    private void GenerateRandomConnections()
     {
-        if (Input.touchCount == 0) return;
+        List<int> shuffledRightIDs = new List<int>();
 
-        Touch touch = Input.GetTouch(0);
-        if (touch.phase != TouchPhase.Began) return;
+        foreach (var node in rightNodes)
+            shuffledRightIDs.Add(node.NodeID);
 
-        Ray ray = arCamera.ScreenPointToRay(touch.position);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 10f, nodeLayer))
-        {
-            WireNode node = hit.collider.GetComponent<WireNode>();
-            if (node != null)
-                node.OnTapped();
-        }
-    }
-
-    void GenerateConnections()
-    {
-        List<int> shuffledRight = new List<int>();
-
-        foreach (var r in rightNodes)
-            shuffledRight.Add(r.nodeID);
-
-        Shuffle(shuffledRight);
+        Shuffle(shuffledRightIDs);
 
         for (int i = 0; i < leftNodes.Count; i++)
         {
-            correctPairs[leftNodes[i].nodeID] = shuffledRight[i];
+            correctPairs[leftNodes[i].NodeID] = shuffledRightIDs[i];
         }
     }
 
-    public void NodeSelected(WireNode node)
+    public void HandleNodeSelection(WireNodeUI node)
     {
-        if (node.isLeftNode)
+        if (node.IsLeftNode)
         {
+            if (!node.GetComponent<UnityEngine.UI.Button>().interactable)
+                return;
+
             selectedLeftNode = node;
             return;
         }
 
-        if (selectedLeftNode == null) return;
+        if (selectedLeftNode == null)
+            return;
 
-        if (correctPairs[selectedLeftNode.nodeID] == node.nodeID)
+        ValidateConnection(selectedLeftNode, node);
+        selectedLeftNode = null;
+    }
+
+    private void ValidateConnection(WireNodeUI leftNode, WireNodeUI rightNode)
+    {
+        if (!correctPairs.ContainsKey(leftNode.NodeID))
+            return;
+
+        if (correctPairs[leftNode.NodeID] == rightNode.NodeID)
         {
-            CreateWire(selectedLeftNode.transform.position, node.transform.position);
+            CreateWire(
+             leftNode.transform.position,
+             rightNode.transform.position,
+             leftNode.NodeColor
+         );
+            SpawnSpark(rightNode.transform.position, leftNode.NodeColor);
 
-            selectedLeftNode.isConnected = true;
-            node.isConnected = true;
+            leftNode.SetInteractable(false);
+            rightNode.SetInteractable(false);
 
             connectedCount++;
 
             if (connectedCount >= leftNodes.Count)
-                PuzzleComplete();
+                PuzzleCompleted();
         }
         else
         {
-            // Wrong answer
-            FindObjectOfType<TimerManager>().AddPenalty(20f);
-        }
-
-        selectedLeftNode = null;
-    }
-
-    void CreateWire(Vector3 start, Vector3 end)
-    {
-        LineRenderer wire = Instantiate(wirePrefab, wireParent);
-        wire.positionCount = 20;
-
-        Vector3 mid = (start + end) / 2f + Vector3.down * 0.05f;
-
-        for (int i = 0; i < 20; i++)
-        {
-            float t = i / 19f;
-
-            Vector3 point =
-                Mathf.Pow(1 - t, 2) * start +
-                2 * (1 - t) * t * mid +
-                Mathf.Pow(t, 2) * end;
-
-            wire.SetPosition(i, point);
+            ApplyPenalty();
         }
     }
 
-    void PuzzleComplete()
+  private void CreateWire(Vector3 start, Vector3 end, Color wireColor)
+{
+    LineRenderer wire = Instantiate(wirePrefab, wireParent);
+
+    wire.startColor = wireColor;
+    wire.endColor = wireColor;
+
+    // SAFE emission handling
+    if (wire.material.HasProperty("_EmissionColor"))
     {
-        Level1Manager.instance.PuzzleSolved();
+        wire.material.EnableKeyword("_EMISSION");
+        wire.material.SetColor("_EmissionColor", wireColor * 2f);
     }
 
-    void Shuffle(List<int> list)
+   DrawFullWire(wire, start, end);
+}
+
+// // private IEnumerator AnimateWire(LineRenderer wire, Vector3 start, Vector3 end)
+// // {
+// //     int resolution = 30;
+// //     float duration = 0.4f;
+
+// //     wire.positionCount = resolution;
+
+// //     Vector3 mid = (start + end) / 2f + Vector3.down * 0.03f;
+
+// //     float time = 0f;
+
+// //     while (time < duration)
+// //     {
+// //         time += Time.deltaTime;
+// //         float progress = time / duration;
+
+// //         int visiblePoints = Mathf.FloorToInt(progress * resolution);
+
+// //         for (int i = 0; i < visiblePoints; i++)
+// //         {
+// //             float t = i / (float)(resolution - 1);
+
+// //             Vector3 point =
+// //                 Mathf.Pow(1 - t, 2) * start +
+// //                 2 * (1 - t) * t * mid +
+// //                 Mathf.Pow(t, 2) * end;
+
+// //             wire.SetPosition(i, point);
+// //         }
+
+// //         yield return null;
+// //     }
+
+//     // Finalize
+//     for (int i = 0; i < resolution; i++)
+//     {
+//         float t = i / (float)(resolution - 1);
+
+//         Vector3 point =
+//             Mathf.Pow(1 - t, 2) * start +
+//             2 * (1 - t) * t * mid +
+//             Mathf.Pow(t, 2) * end;
+
+//         wire.SetPosition(i, point);
+//     }
+// }
+
+private void DrawFullWire(LineRenderer wire, Vector3 start, Vector3 end)
+{
+    int resolution = 30;
+    wire.positionCount = resolution;
+
+    Vector3 mid = (start + end) / 2f + Vector3.down * 0.03f;
+
+    for (int i = 0; i < resolution; i++)
+    {
+        float t = i / (float)(resolution - 1);
+
+        Vector3 point =
+            Mathf.Pow(1 - t, 2) * start +
+            2 * (1 - t) * t * mid +
+            Mathf.Pow(t, 2) * end;
+
+        wire.SetPosition(i, point);
+    }
+}
+private void SpawnSpark(Vector3 position, Color color)
+{
+    if (sparkPrefab == null)
+        return;
+
+    ParticleSystem spark = Instantiate(sparkPrefab, position, Quaternion.identity);
+
+    var main = spark.main;
+    main.startColor = color;
+
+    Destroy(spark.gameObject, 1f);
+}
+    private void ApplyPenalty()
+    {
+        TimerManager.instance.AddPenalty(wrongPenalty);
+    }
+
+   private void PuzzleCompleted()
+{
+    Level1Manager.instance.PuzzleSolved();
+    puzzlePanel.SetActive(false);
+}
+
+    private void Shuffle(List<int> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            int rnd = Random.Range(i, list.Count);
+            int randomIndex = Random.Range(i, list.Count);
             int temp = list[i];
-            list[i] = list[rnd];
-            list[rnd] = temp;
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
+    private void AssignColors()
+{
+    for (int i = 0; i < leftNodes.Count; i++)
+    {
+        Color color = wireColors[i];
+
+        leftNodes[i].SetColor(color);
+        rightNodes[i].SetColor(color);
+    }
+}
 }
