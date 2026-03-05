@@ -641,6 +641,8 @@ GameObject:
   - component: {fileID: 8542184031247868030}
   - component: {fileID: 3877451140131946347}
   - component: {fileID: 1775972163581431551}
+  - component: {fileID: 3416935865949414873}
+  - component: {fileID: 4061263293133011543}
   m_Layer: 0
   m_Name: ValveWheel.002
   m_TagString: Untagged
@@ -713,6 +715,44 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3416935865949414873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418996054471550114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a990de21d03d634692d4282e26edca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: 0
+  rotationStep: 36
+  rotateSound: {fileID: 0}
+--- !u!136 &4061263293133011543
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418996054471550114}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14638
+  m_Height: 0.21623392
+  m_Direction: 1
+  m_Center: {x: -0.0002548955, y: -0.077731766, z: 0.00013609235}
 --- !u!1 &474895528637484521
 GameObject:
   m_ObjectHideFlags: 0
@@ -10009,6 +10049,8 @@ GameObject:
   - component: {fileID: 7781936529577814247}
   - component: {fileID: 3827571457406464730}
   - component: {fileID: 1418734571219779858}
+  - component: {fileID: 6098693861567049645}
+  - component: {fileID: 7214391169697766922}
   m_Layer: 0
   m_Name: ValveWheel
   m_TagString: Untagged
@@ -10081,6 +10123,44 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6098693861567049645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5277726741489467710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a990de21d03d634692d4282e26edca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: 0
+  rotationStep: 36
+  rotateSound: {fileID: 0}
+--- !u!136 &7214391169697766922
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5277726741489467710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14638002
+  m_Height: 0.21623392
+  m_Direction: 1
+  m_Center: {x: -0.0002548359, y: -0.07773153, z: 0.00013597315}
 --- !u!1 &5388158993145535988
 GameObject:
   m_ObjectHideFlags: 0
@@ -18061,6 +18141,8 @@ GameObject:
   - component: {fileID: 6084368268190628136}
   - component: {fileID: 4968158227448282155}
   - component: {fileID: 791743912997379818}
+  - component: {fileID: 4439413711822411110}
+  - component: {fileID: 530599018466370193}
   m_Layer: 0
   m_Name: ValveWheel
   m_TagString: Untagged
@@ -18133,6 +18215,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4439413711822411110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846275763827265776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a990de21d03d634692d4282e26edca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: 0
+  rotationStep: 36
+  rotateSound: {fileID: 0}
+--- !u!135 &530599018466370193
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846275763827265776}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.14638002
+  m_Center: {x: -0.0002548359, y: -0.07773153, z: 0.00013597315}
 --- !u!1 &8866020690974874425
 GameObject:
   m_ObjectHideFlags: 0

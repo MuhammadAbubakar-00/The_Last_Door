@@ -1,6 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7374165741415768778
+--- !u!114 &-8574849970446542513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: Standalone Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: -3512397542815102671}
+  m_InitManagerOnStart: 1
+--- !u!114 &-3512397542815102671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16,7 +30,7 @@ MonoBehaviour:
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
   m_Loaders:
-  - {fileID: 11400000, guid: 6e44633202c75ad4481f9e8c8db2c32d, type: 2}
+  - {fileID: 11400000, guid: 71ece08502d3d0a418f3a997839ed5c1, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Keys: 0700000001000000
   Values:
-  - {fileID: 8791498066173210560}
-  - {fileID: 4792523304044135765}
---- !u!114 &871804361883710251
+  - {fileID: 6271908134236772632}
+  - {fileID: -8574849970446542513}
+--- !u!114 &2680495987490098704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,22 +63,8 @@ MonoBehaviour:
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
   m_Loaders:
-  - {fileID: 11400000, guid: 671334576c6ef6c449da764763902c53, type: 2}
---- !u!114 &4792523304044135765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
-  m_Name: Standalone Settings
-  m_EditorClassIdentifier: 
-  m_LoaderManagerInstance: {fileID: -7374165741415768778}
-  m_InitManagerOnStart: 1
---- !u!114 &8791498066173210560
+  - {fileID: 11400000, guid: e0dfe52eaea437743bebe55b1597b73d, type: 2}
+--- !u!114 &6271908134236772632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,5 +76,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
   m_Name: Android Settings
   m_EditorClassIdentifier: 
-  m_LoaderManagerInstance: {fileID: 871804361883710251}
+  m_LoaderManagerInstance: {fileID: 2680495987490098704}
   m_InitManagerOnStart: 1
