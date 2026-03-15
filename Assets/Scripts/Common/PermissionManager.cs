@@ -19,12 +19,12 @@ public class PermissionManager : MonoBehaviour
     {
 #if UNITY_ANDROID
         // Microphone Permission
-        if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
-        {
-            Permission.RequestUserPermission(Permission.Microphone);
-            yield return new WaitUntil(() =>
-                Permission.HasUserAuthorizedPermission(Permission.Microphone));
-        }
+        // if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+        // {
+        //     Permission.RequestUserPermission(Permission.Microphone);
+        //     yield return new WaitUntil(() =>
+        //         Permission.HasUserAuthorizedPermission(Permission.Microphone));
+        // }
 
         // Camera Permission
         if (!Permission.HasUserAuthorizedPermission(Permission.Camera))

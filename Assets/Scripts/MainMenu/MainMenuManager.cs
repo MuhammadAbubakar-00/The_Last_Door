@@ -8,8 +8,11 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         settingPopUp.SetActive(false);
+        quitPopUp.SetActive(false);
     }
     [SerializeField] private GameObject settingPopUp;
+    [SerializeField] private GameObject quitPopUp;
+    
     public string sceneName;
     public void StartGame()
     {
@@ -28,5 +31,10 @@ public class MainMenuManager : MonoBehaviour
     {
         if (settingPopUp != null)
             settingPopUp.SetActive(true);
+    }
+    public void OpenQuitPopUp()
+    {
+        if (quitPopUp != null)
+            quitPopUp.SetActive(true);
     }
 }

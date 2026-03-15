@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.SceneManagement;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -70,13 +71,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Update()
         {
-            // if (spawnedObject != null)
-            //     return;
+            if (spawnedObject != null)
+                return;
 
             UpdatePlacementIndicator();
 
-            // if (!placementPoseValid)
-            //     return;
+            if (!placementPoseValid)
+                return;
 
             if (TryGetTouch(out _))
             {
@@ -151,8 +152,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         private void PlaceObject()
 {
-    // if (!planeDetected || !placementPoseValid)
-    //     return;
+    if (!planeDetected || !placementPoseValid)
+        return;
 
     spawnedObject = Instantiate(
         m_PlacedPrefab,
@@ -190,7 +191,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
    
     public void backToMenu(){
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LanguageSelection");
+       SceneManager.LoadScene("MainMenu");
     }
 
     }

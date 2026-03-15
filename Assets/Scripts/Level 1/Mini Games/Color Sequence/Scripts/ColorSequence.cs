@@ -64,6 +64,7 @@ public class ColorSequence : MonoBehaviour
             if (inputIndex >= pattern.Count)
             {
                 Level1Manager.instance.PuzzleSolved();
+                
                 patternDisplay.SetActive(false);
             }
         }

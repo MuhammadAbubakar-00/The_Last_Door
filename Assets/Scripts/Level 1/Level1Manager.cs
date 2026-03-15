@@ -16,6 +16,7 @@ public class Level1Manager : MonoBehaviour
     public void PuzzleSolved()
     {
         puzzlesCompleted++;
+        
 
         if (puzzlesCompleted >= 3)
         {
