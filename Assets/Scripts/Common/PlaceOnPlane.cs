@@ -35,6 +35,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
        private bool placementPoseValid;
         private Pose placementPose;
 
+        private OxygenTimer oxygenTimer;
+
         void Awake()
         {
             raycastManager = GetComponent<ARRaycastManager>();
@@ -160,8 +162,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
         placementIndicator.transform.position,
         placementIndicator.transform.rotation);
 
-    
+     
     DisableAllPlanes();
+
+   // oxygenTimer.StartTimer();
 
     coachingCanvas.SetActive(false);
     placementIndicator.SetActive(false);
