@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Splash.unity
     guid: c4c9bc576344edf41a8e52072aa5024b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PermisssionManagr.unity
     guid: 65444a15329823241a8736251d7c4173
   - enabled: 0
@@ -17,12 +17,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level_1.unity
     guid: 6594489efd60e5b478f50791f9aa0f64
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_2.unity
     guid: 40cb959764654b74f943c3ef2ed41c7a
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Level_3.unity
+    guid: 9b4cf2e73d719a346a5903a63692c714
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: e2348a47636a116479610ea1e2cad8aa, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 74856ec3eb524a143a4b52b0b078ca24, type: 2}
