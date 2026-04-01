@@ -15,8 +15,12 @@ public class XRayScanner : MonoBehaviour
     private bool _isScanning = false;
     private float _currentBattery = 1f;
 
+    private Camera arCamera;
+[SerializeField] private LayerMask hiddenLayer;
+
     void Start()
     {
+        arCamera = Camera.main;
         // Setup Button Events
         // Requires a "Trigger" component or standard UI Button events
     }
@@ -31,29 +35,38 @@ public class XRayScanner : MonoBehaviour
         _isScanning = false;
     }
 
+   private void ToggleShields(bool isVisible)
+{
+    if (isVisible)
+        arCamera.cullingMask |= hiddenLayer; // Add layer to view
+    else
+        arCamera.cullingMask &= ~hiddenLayer; // Remove layer from view
+}
     void Update()
+{
+    // High-performance check: Only run logic if we are scanning OR if battery needs to regen
+    if (_isScanning && _currentBattery > 0)
     {
-        if (_isScanning && _currentBattery > 0)
+        _currentBattery -= Time.deltaTime * batteryDrainSpeed;
+        ToggleShields(true); // SHOW the hidden code
+        
+        // If battery hits zero while holding, force stop
+        if (_currentBattery <= 0) 
         {
-            _currentBattery -= Time.deltaTime * batteryDrainSpeed;
-            ToggleShields(false); // Hide walls
-        }
-        else
-        {
+            _currentBattery = 0;
             _isScanning = false;
-            _currentBattery += Time.deltaTime * batteryRegenSpeed;
-            ToggleShields(true); // Show walls
         }
-
-        _currentBattery = Mathf.Clamp01(_currentBattery);
-        if(batterySlider) batterySlider.value = _currentBattery;
     }
-
-    private void ToggleShields(bool state)
+    else
     {
-        foreach (var shield in shieldObjects)
-        {
-            shield.SetActive(state);
-        }
+        // Regain battery when not scanning
+        if (_currentBattery < 1.0f)
+            _currentBattery += Time.deltaTime * batteryRegenSpeed;
+            
+        ToggleShields(false); // HIDE the hidden code
     }
+
+    _currentBattery = Mathf.Clamp01(_currentBattery);
+    if(batterySlider) batterySlider.value = _currentBattery;
+}
 }
