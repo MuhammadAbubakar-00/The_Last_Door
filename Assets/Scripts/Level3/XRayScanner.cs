@@ -6,6 +6,7 @@ public class XRayScanner : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Button scanButton;
     [SerializeField] private Slider batterySlider;
+    [SerializeField] private GameObject scannerUI; // The UI element that shows the scanner interface
 
     [Header("Settings")]
     [SerializeField] private GameObject[] shieldObjects; // The outer wall parts
@@ -16,11 +17,13 @@ public class XRayScanner : MonoBehaviour
     private float _currentBattery = 1f;
 
     private Camera arCamera;
-[SerializeField] private LayerMask hiddenLayer;
+    [SerializeField] private LayerMask hiddenLayer;
+    
 
     void Start()
     {
         arCamera = Camera.main;
+        scannerUI.SetActive(false); // Hide scanner UI by default
         // Setup Button Events
         // Requires a "Trigger" component or standard UI Button events
     }
@@ -48,6 +51,7 @@ public class XRayScanner : MonoBehaviour
     if (_isScanning && _currentBattery > 0)
     {
         _currentBattery -= Time.deltaTime * batteryDrainSpeed;
+        scannerUI.SetActive(true); // Show the scanner UI
         ToggleShields(true); // SHOW the hidden code
         
         // If battery hits zero while holding, force stop
@@ -64,6 +68,7 @@ public class XRayScanner : MonoBehaviour
             _currentBattery += Time.deltaTime * batteryRegenSpeed;
             
         ToggleShields(false); // HIDE the hidden code
+        scannerUI.SetActive(false); // Hide the scanner UI
     }
 
     _currentBattery = Mathf.Clamp01(_currentBattery);

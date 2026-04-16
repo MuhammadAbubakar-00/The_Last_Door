@@ -3516,7 +3516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingPopUp: {fileID: 840342138}
   quitPopUp: {fileID: 1873365099}
-  sceneName: Level_1
+  sceneName: Intro
 --- !u!4 &1813046844
 Transform:
   m_ObjectHideFlags: 0

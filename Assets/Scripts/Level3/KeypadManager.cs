@@ -18,6 +18,7 @@ public class KeypadManager : MonoBehaviour
     [SerializeField] private Animator doorAnimator; // Drag your Door here
     [SerializeField] private string doorOpenTrigger = "Open";
     [SerializeField] private OxygenTimer oxygenTimer; // To stop the countdown
+    [SerializeField] private GameObject WinScreenUI; // The UI element that shows the keypad interface
 
     private string _currentInput = "";
 
@@ -54,7 +55,8 @@ private void HandleAccessGranted()
     
     // Play Door Animation
     if (doorAnimator != null) doorAnimator.SetTrigger("Open");
-
+    // Show Win Screen
+    if (WinScreenUI != null) WinScreenUI.SetActive(true);
     // Stop Oxygen Timer
     if (oxygenTimer != null) oxygenTimer.StopTimer();
 }

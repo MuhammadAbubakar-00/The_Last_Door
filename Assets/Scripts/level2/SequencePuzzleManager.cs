@@ -9,8 +9,13 @@ public class SequencePuzzleManager : MonoBehaviour
 
     [Header("Level Objects")]
     public Animator doorAnimator;
+    public GameObject WinUi;
    // public AudioSource successSFX;
    // public AudioSource errorSFX;
+void start()
+    {
+        WinUi.SetActive(false);
+    }
 
    public void RegisterPress(string id)
 {
@@ -35,7 +40,10 @@ public class SequencePuzzleManager : MonoBehaviour
     {
        // successSFX.Play();
         doorAnimator.SetTrigger("Open");
+
         // Logic to move to next level or show "Victory" UI
+        WinUi.SetActive(true);
+        Time.timeScale = 0f; // Pause the game
     }
 
     private void HandleWrongSequence()
